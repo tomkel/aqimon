@@ -1,6 +1,7 @@
 import { Text, View } from "react-native";
+import MapLibre from "./MapLibre.tsx"
 
-export default function Index() {
+function Index() {
   return (
     <View
       style={{
@@ -12,6 +13,12 @@ export default function Index() {
       <Text>Edit app/index.tsx to edit this screen.</Text>
     </View>
   );
+}
+
+export default function MapIndex() {
+  return (
+    <MapLibre />
+  )
 }
 
 export const unstable_settings = {

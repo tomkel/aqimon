@@ -6,7 +6,8 @@
       "@/*": [
         "./app-example/*"
       ]
-    }
+    },
+    "allowImportingTsExtensions": true
   },
   "include": [
     "**/*.ts",

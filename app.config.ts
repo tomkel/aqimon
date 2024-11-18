@@ -7,7 +7,7 @@ const config: ExpoConfig = {
   slug: "aqimon",
   version: "1.0.0",
   orientation: "portrait",
-  // icon: "./assets/images/icon.png",
+  icon: "./assets/images/icon.png",
   scheme: "myapp",
   userInterfaceStyle: "automatic",
   jsEngine: "hermes",
@@ -17,26 +17,28 @@ const config: ExpoConfig = {
   },
   android: {
     adaptiveIcon: {
-      // foregroundImage: "./assets/images/adaptive-icon.png",
+      foregroundImage: "./assets/images/adaptive-icon.png",
       backgroundColor: "#ffffff",
     },
+    package: 'com.aqimon'
   },
   web: {
     bundler: "metro",
     output: "single",
-    // favicon: "./assets/images/favicon.png",
+    favicon: "./assets/images/favicon.png",
   },
   plugins: [
     "expo-router",
     [
       "expo-splash-screen",
       {
-        // image: "./assets/images/splash-icon.png",
+        image: "./assets/images/splash-icon.png",
         imageWidth: 200,
         resizeMode: "contain",
         backgroundColor: "#ffffff",
       },
     ],
+    "@maplibre/maplibre-react-native",
   ],
   experiments: {
     typedRoutes: true,
