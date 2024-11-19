@@ -20,6 +20,7 @@
     "@maplibre/maplibre-react-native": "10.0.0-alpha.26",
     "@react-navigation/bottom-tabs": "^7.0.0",
     "@react-navigation/native": "^7.0.0",
+    "@rnmapbox/maps": "^10.1.33",
     "babel-plugin-react-compiler": "beta",
     "expo": "~52.0.7",
     "expo-blur": "~14.0.1",
@@ -28,6 +29,7 @@
     "expo-font": "~13.0.1",
     "expo-haptics": "~14.0.0",
     "expo-linking": "~7.0.2",
+    "expo-location": "~18.0.1",
     "expo-router": "~4.0.6",
     "expo-splash-screen": "~0.29.11",
     "expo-status-bar": "~2.0.0",
@@ -47,6 +49,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
+    "@biomejs/biome": "1.9.4",
     "@testing-library/react-native": "^12.8.1",
     "@types/jest": "^29.5.14",
     "@types/react": "npm:types-react@rc",
@@ -62,6 +65,5 @@
     "@types/react": "npm:types-react@rc",
     "@types/react-dom": "npm:types-react-dom@rc"
   },
-  "private": true,
-  "packageManager": "pnpm@9.13.2+sha512.88c9c3864450350e65a33587ab801acf946d7c814ed1134da4a924f6df5a2120fd36b46aab68f7cd1d413149112d53c7db3a4136624cfd00ff1846a0c6cef48a"
+  "private": true
 }
