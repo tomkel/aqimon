@@ -18,9 +18,9 @@
   "dependencies": {
     "@expo/vector-icons": "^14.0.4",
     "@maplibre/maplibre-react-native": "10.0.0-alpha.26",
+    "@react-native-community/geolocation": "^3.4.0",
     "@react-navigation/bottom-tabs": "^7.0.0",
     "@react-navigation/native": "^7.0.0",
-    "@rnmapbox/maps": "^10.1.33",
     "babel-plugin-react-compiler": "beta",
     "expo": "~52.0.7",
     "expo-blur": "~14.0.1",

@@ -1,28 +1,42 @@
 'use client'
+// expo-location requires google play services 
 import { useState, useEffect } from 'react'
 import { Platform, Text, View, StyleSheet } from 'react-native'
 import * as Location from 'expo-location'
-import MapLibreGL, { UserLocation } from '@maplibre/maplibre-react-native'
+import MapLibreGL, { Annotation, UserLocation } from '@maplibre/maplibre-react-native'
 
 export default function CurrLocation() {
-  // const [location, setLocation] = useState<Location.LocationObject | null>(null);
-  const [location, setLocation] = useState<MapLibreGL.Location | Location.LocationObject | null>(null)
-  // const [location, setLocation] = useState<MapLibreGL.Location | null>(null)
-  const [errorMsg, setErrorMsg] = useState<string | null>(null)
+  const [location, setLocation] = useState<Location.LocationObject>()
+  // const [location, setLocation] = useState<MapLibreGL.Location | Location.LocationObject | null>(null)
+  // const [location, setLocation] = useState<MapLibreGL.Location>()
+  const [errorMsg, setErrorMsg] = useState<string>()
+  // const [intervalId, setIntervalId] = useState(-1)
 
   useEffect(() => {
-    async function getCurrentLocation() {
+    async function checkLocPerm() {
       const { status } = await Location.requestForegroundPermissionsAsync()
       if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied')
-        return
+        throw new Error('Permission to access location was denied')
       }
-
-      const expoLocation = await Location.getCurrentPositionAsync({})
-      setLocation(expoLocation)
     }
 
-    getCurrentLocation()
+    checkLocPerm()
+      .then(() => {
+        console.log('watching..')
+        Location.watchPositionAsync(
+          {
+            accuracy: Location.LocationAccuracy.Highest,
+            mayShowUserSettingsDialog: false,
+            timeInterval: 1,
+            distanceInterval: 1,
+          },
+          (expoLocation: Location.LocationObject) => {
+            console.log('got loc', expoLocation)
+            setLocation(expoLocation)
+          },
+        )
+      })
+      .catch((e) => setErrorMsg(e))
   }, [])
 
   let text = 'Waiting...'
@@ -33,5 +47,15 @@ export default function CurrLocation() {
   }
   console.log('loc', text)
 
-  return <UserLocation onUpdate={(newLocation) => setLocation(newLocation)} />
+  return (
+    <>
+      {location && (
+        <Annotation
+          id="gps"
+          coordinates={[location.coords.longitude, location.coords.latitude]}
+          animated={false}
+        />
+      )}
+    </>
+  )
 }

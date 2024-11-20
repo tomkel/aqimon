@@ -1,4 +1,4 @@
-import type { ExpoConfig, ConfigContext } from "expo/config";
+import type { ExpoConfig, ConfigContext } from 'expo/config'
 
 // export default ({ config }: ConfigContext): ExpoConfig => {
 
@@ -47,17 +47,12 @@ const config: ExpoConfig = {
       },
     ],
     '@maplibre/maplibre-react-native',
-    [
-      '@rnmapbox/maps',
-      {
-        RNMapboxMapsDownloadToken: 'sk',
-        RNMapboxMapsVersion: '11.8.0',
-      },
-    ],
+    // [ '@rnmapbox/maps', { RNMapboxMapsDownloadToken: 'sk', RNMapboxMapsVersion: '11.8.0', }, ],
   ],
   experiments: {
     typedRoutes: true,
     reactCanary: true,
+    turboModules: true,
     // reactCompiler: true,
     // reactServerFunctions: true,
     // reactServerComponentRoutes: true,

@@ -2,8 +2,10 @@
 import React, { Component, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import MapLibreGL, { MapView, UserLocation } from '@maplibre/maplibre-react-native'
-import MLCurrLoc from './MLCurrLoc.tsx'
+// import MLCurrLoc from './MLCurrLoc.tsx'
 import LocPerms from './LocPerms.tsx'
+// import CurrLocation from './CurrLocation.tsx'
+import BrowserLoc from './BrowserLoc.tsx'
 // import MapView from 'react-native-maps'
 // import Mapbox, { MapView, LocationPuck } from '@rnmapbox/maps'
 
@@ -40,7 +42,9 @@ const MapsLibre = () => {
       compassEnabled={true}
       compassViewPosition={1}
     >
-      <MLCurrLoc onUpdate={null}/>
+      <BrowserLoc />
+      {/* <CurrLocation /> */}
+      {/* <MLCurrLoc onUpdate={null}/> */}
     </MapView>
   )
 }

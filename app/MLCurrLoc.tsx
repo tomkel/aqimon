@@ -16,7 +16,8 @@ export default function MLCurrLoc({ onUpdate }: { onUpdate: null | ((newLocation
   return (
     <UserLocation
       animated={false}
-      renderMode="native"
+      // renderMode="native"
+      renderMode="normal"
       androidRenderMode="compass"
       visible={true}
       showsUserHeadingIndicator={true}
