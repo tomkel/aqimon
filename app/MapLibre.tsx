@@ -1,14 +1,15 @@
 'use client'
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
-// import MapLibreGL, { MapView } from '@maplibre/maplibre-react-native'
+import MapLibreGL, { MapView, UserLocation } from '@maplibre/maplibre-react-native'
+import MLCurrLoc from './MLCurrLoc.tsx'
+import LocPerms from './LocPerms.tsx'
 // import MapView from 'react-native-maps'
-import { MapView } from '@rnmapbox/maps'
-import CurrLocation from './CurrLocation.tsx'
+// import Mapbox, { MapView, LocationPuck } from '@rnmapbox/maps'
 
 // Will be null for most users (only Mapbox authenticates this way).
 // Required on Android. See Android installation notes.
-// MapLibreGL.setAccessToken(null)
+MapLibreGL.setAccessToken(null)
 
 const styles = StyleSheet.create({
   page: {
@@ -19,8 +20,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'tomato',
   },
   container: {
-    height: 700,
-    width: 350,
+    height: '85%',
+    width: '85%',
     backgroundColor: 'green',
   },
   map: {
@@ -29,18 +30,24 @@ const styles = StyleSheet.create({
   },
 })
 
-const MapsLibre = () => (
-  <MapView
-    style={styles.map}
-    logoEnabled={false}
-    styleURL="https://demotiles.maplibre.org/style.json"
-    compassEnabled={true}
-    compassViewPosition={1}
-  />
-)
+const MapsLibre = () => {
 
+  return (
+    <MapView
+      style={styles.map}
+      logoEnabled={false}
+      styleURL="https://demotiles.maplibre.org/style.json"
+      compassEnabled={true}
+      compassViewPosition={1}
+    >
+      <MLCurrLoc onUpdate={null}/>
+    </MapView>
+  )
+}
+
+/*
 const MapsExpo = () => <MapView style={styles.map} />
-
+Mapbox.setAccessToken(`pk`)
 const MapsMapbox = () => (
   <MapView
     style={styles.map}
@@ -48,17 +55,22 @@ const MapsMapbox = () => (
     // styleURL="https://demotiles.maplibre.org/style.json"
     compassEnabled={true}
     compassViewPosition={1}
-  />
+  >
+    <LocationPuck
+       puckBearingEnabled={true}
+    />
+  </MapView>
 )
+*/
 
-export default class MapLibre extends Component {
-  render() {
-    return (
-      <View style={styles.page}>
-        <View style={styles.container}>
-          <MapsMapbox />
-        </View>
+export default function MapLibre() {
+  return (
+    <View style={styles.page}>
+      <View style={styles.container}>
+        <LocPerms>
+          <MapsLibre />
+        </LocPerms>
       </View>
-    )
-  }
+    </View>
+  )
 }

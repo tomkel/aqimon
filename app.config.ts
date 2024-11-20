@@ -3,7 +3,7 @@ import type { ExpoConfig, ConfigContext } from "expo/config";
 // export default ({ config }: ConfigContext): ExpoConfig => {
 
 const config: ExpoConfig = {
-  name: 'AQI mon',
+  name: 'AQI Monitor',
   slug: 'aqimon',
   version: '1.0.0',
   orientation: 'portrait',
@@ -50,17 +50,17 @@ const config: ExpoConfig = {
     [
       '@rnmapbox/maps',
       {
-        RNMapboxMapsDownloadToken: 'sk.ey..',
-        RNMapboxMapsVersion: '11.0.0',
+        RNMapboxMapsDownloadToken: 'sk',
+        RNMapboxMapsVersion: '11.8.0',
       },
     ],
   ],
   experiments: {
     typedRoutes: true,
     reactCanary: true,
-    reactCompiler: true,
-    reactServerFunctions: true,
-    reactServerComponentRoutes: true,
+    // reactCompiler: true,
+    // reactServerFunctions: true,
+    // reactServerComponentRoutes: true,
   },
 }
 
