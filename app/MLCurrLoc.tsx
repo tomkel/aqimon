@@ -1,4 +1,6 @@
 'use client'
+// never triggers re-render
+// native render updates the icon position , but doesn't trigger react re-render
 import { useState } from 'react'
 import type MapLibreGL from '@maplibre/maplibre-react-native'
 import { UserLocation } from '@maplibre/maplibre-react-native'

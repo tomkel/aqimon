@@ -5,7 +5,7 @@ import { Platform, Text, View, StyleSheet } from 'react-native'
 import * as Location from 'expo-location'
 import MapLibreGL, { Annotation, UserLocation } from '@maplibre/maplibre-react-native'
 
-export default function CurrLocation() {
+export default function ExpoLoc() {
   const [location, setLocation] = useState<Location.LocationObject>()
   // const [location, setLocation] = useState<MapLibreGL.Location | Location.LocationObject | null>(null)
   // const [location, setLocation] = useState<MapLibreGL.Location>()
