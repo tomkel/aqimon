@@ -1,0 +1,30 @@
+expo: https://github.com/react-native-maps/react-native-maps (requires google play services)
+mapbox web: https://docs.mapbox.com/mapbox-gl-js/guides/
+mapbox native:  https://docs.mapbox.com/android/maps/guides/
+mapbox react-native: https://github.com/rnmapbox/maps
+-- https://docs.mapbox.com/android/maps/api/11.8.0/
+https://github.com/maplibre/maplibre-react-native
+
+https://openlayers.org/
+https://github.com/maplibre/awesome-maplibre
+
+
+Using expo modules
+  - expo-asset (11.0.1)
+  - expo-blur (14.0.1)
+  - expo-constants (17.0.3)
+  - expo-dev-client (5.0.2)
+  - expo-dev-launcher (5.0.14)
+  - expo-dev-menu (6.0.10)
+  - expo-file-system (18.0.3)
+  - expo-font (13.0.1)
+  - expo-haptics (14.0.0)
+  - expo-json-utils (0.14.0)
+  - expo-keep-awake (14.0.1)
+  - expo-linking (7.0.2)
+  - expo-location (18.0.1)
+  - expo-manifests (0.15.3)
+  - expo-modules-core (2.0.3)
+  - expo-splash-screen (0.29.11)
+  - expo-system-ui (4.0.3)
+  - expo-web-browser (14.0.1)
