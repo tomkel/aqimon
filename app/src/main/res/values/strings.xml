@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AQI Monitor</string>
+    <string name="maplibre_style_url">https://demotiles.maplibre.org/style.json</string>
+</resources>
