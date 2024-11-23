@@ -1,6 +1,11 @@
 <script lang="ts">
   // https://github.com/dimfeld/svelte-maplibre/blob/next/src/lib/GeolocateControl.svelte
   // https://maplibre.org/maplibre-gl-js/docs/API/classes/GeolocateControl
+  // https://github.com/maplibre/maplibre-gl-js/blob/main/src/util/geolocation_support.ts
+  // https://github.com/maplibre/maplibre-gl-js/blob/main/src/ui/control/geolocate_control.ts
+  // https://github.com/tauri-apps/plugins-workspace/tree/v2/plugins/geolocation
+  // https://github.com/tauri-apps/plugins-workspace/blob/v2/plugins/geolocation/android/src/main/java/Geolocation.kt
+  // tauri geolocation plugin uses google API
   import {
     MapLibre,
     FullscreenControl,
@@ -9,6 +14,36 @@
     ScaleControl,
   } from 'svelte-maplibre'
   import type maplibregl from 'maplibre-gl'
+  import {
+    checkPermissions,
+    requestPermissions,
+    getCurrentPosition,
+    watchPosition,
+    clearWatch,
+  } from '@tauri-apps/plugin-geolocation'
+  import { platform } from '@tauri-apps/plugin-os'
+
+  async function setupGeoloc() {
+    try {
+      if (platform() !== 'android') return
+      
+      // window.navigator.geolocation.getCurrentPosition = getCurrentPosition
+      // window.navigator.geolocation.watchPosition = watchPosition
+
+      const checkStatus = await checkPermissions()
+      console.log('checkStatus', checkStatus)
+      if (
+        checkStatus.coarseLocation === 'prompt' ||
+        checkStatus.coarseLocation === 'prompt-with-rationale'
+      ) {
+        const requestStatus = await requestPermissions(['location'])
+        console.log('requestStatus', requestStatus)
+      }
+    } catch (e: unknown) {
+      console.error('probably not in tauri env:', e)
+    }
+  }
+  void setupGeoloc()
 
   type GeoEvent =
     | 'trackuserlocationstart'
