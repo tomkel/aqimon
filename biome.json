@@ -28,5 +28,19 @@
       "semicolons": "asNeeded",
       "lineWidth": 120
     }
-  }
+  },
+  "overrides": [
+    {
+      "include": [
+        "*.svelte"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "useConst": "off"
+          }
+        }
+      }
+    }
+  ]
 }
