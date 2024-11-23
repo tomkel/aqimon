@@ -10,8 +10,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +30,9 @@ import org.ramani.compose.CameraPosition
 import org.ramani.compose.LocationRequestProperties
 import org.ramani.compose.LocationStyling
 import org.ramani.compose.MapLibre
+import org.ramani.compose.UiSettings
+
+// import org.ramani.compose.UiSettings
 
 //        setContent {
 //            AQIMonitorTheme {
@@ -45,42 +50,41 @@ class MainActivity : ComponentActivity() {
         val locationPropertiesState: MutableState<LocationRequestProperties?> = mutableStateOf(null)
         requestPermissions(locationPropertiesState)
 
+        val uiSettings = UiSettings()
+        uiSettings.isLogoEnabled = false
+        uiSettings.setIsLogoEnabled(false)
+
         setContent {
             AQIMonitorTheme {
                 val locationProperties = rememberSaveable { locationPropertiesState }
                 val cameraPosition = rememberSaveable { mutableStateOf(CameraPosition()) }
                 val userLocation = rememberSaveable { mutableStateOf(Location(null)) }
 
-                Box {
-                    Surface(
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background
-                    ) {
-                        MapLibre(
-                            modifier = Modifier.fillMaxSize(),
-                            styleBuilder = Style.Builder()
-                                .fromUri(resources.getString(R.string.maplibre_style_url)),
-                            cameraPosition = cameraPosition.value,
-                            locationRequestProperties = locationProperties.value,
-                            locationStyling = LocationStyling(
-                                enablePulse = true,
-                                pulseColor = Color.YELLOW,
-                            ),
-                            userLocation = userLocation,
-                        )
-                    }
-                    Button(
-                        modifier = Modifier.align(Alignment.BottomCenter),
-                        onClick = {
-                            cameraPosition.value = CameraPosition(cameraPosition.value).apply {
-                                this.target = LatLng(
-                                    userLocation.value.latitude,
-                                    userLocation.value.longitude
-                                )
-                            }
-                        },
-                    ) {
-                        Text(text = "Center on device location")
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    Box(modifier = Modifier.padding(innerPadding)) {
+                        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                            MapLibre(
+                                modifier = Modifier.fillMaxSize(),
+                                styleBuilder =
+                                    Style.Builder().fromUri(resources.getString(R.string.maplibre_style_url)),
+                                cameraPosition = cameraPosition.value,
+                                locationRequestProperties = locationProperties.value,
+                                locationStyling = LocationStyling(enablePulse = true, pulseColor = Color.YELLOW),
+                                userLocation = userLocation,
+                                uiSettings = uiSettings,
+                            )
+                        }
+                        Button(
+                            modifier = Modifier.align(Alignment.BottomCenter),
+                            onClick = {
+                                cameraPosition.value =
+                                    CameraPosition(cameraPosition.value).apply {
+                                        this.target = LatLng(userLocation.value.latitude, userLocation.value.longitude)
+                                    }
+                            },
+                        ) {
+                            Text(text = "Center on device location")
+                        }
                     }
                 }
             }
@@ -88,27 +92,26 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun requestPermissions(locationPropertiesState: MutableState<LocationRequestProperties?>) {
-        val locationPermissionRequest = registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        ) { permissions ->
-            when {
-                permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                    locationPropertiesState.value = LocationRequestProperties()
-                }
+        val locationPermissionRequest =
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+                when {
+                    // permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                    //     locationPropertiesState.value = LocationRequestProperties()
+                    // }
 
-                permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                    locationPropertiesState.value = LocationRequestProperties()
-                }
+                    permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                        locationPropertiesState.value = LocationRequestProperties()
+                    }
 
-                else -> {
-                    locationPropertiesState.value = null
+                    else -> {
+                        locationPropertiesState.value = null
+                    }
                 }
             }
-        }
 
         locationPermissionRequest.launch(
             arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
+                // Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             )
         )
@@ -117,17 +120,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+    Text(text = "Hello $name!", modifier = modifier)
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    AQIMonitorTheme {
-        Greeting("Android")
-    }
+    AQIMonitorTheme { Greeting("Android") }
 }
-
